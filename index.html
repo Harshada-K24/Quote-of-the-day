@@ -45,7 +45,7 @@
             let rnum = Math.floor(Math.random() * 20);
             quotesData = realData[rnum];
             quotes.innerText = `${quotesData.text}`;
-            quotesData == null
+            quotesData.author == null
                 ? (author.innerText = "unKnown")
                 : (author.innerText = `${quotesData.author}`);
         };
