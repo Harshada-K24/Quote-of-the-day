@@ -1,0 +1,66 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="quote-box">
+        <h2>Quote of the day</h2>
+
+
+
+
+        <div class="container">
+            <div class="inner">
+                <div class="box">
+                    <p class="number">
+                    </p>
+                    <div class="text">
+                        <i class="start-quote fas fa-quote-left"></i>
+                        <p id="quotes" class="quotes"></p>
+                        <p id="author" class="author"></p>
+                    </div>
+                    <label class="button">
+                        <p id="newQ">new Quotes</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        const quotes = document.getElementById("quotes");
+        const author = document.getElementById("author");
+        const newQ = document.getElementById("newQ");
+        let realData = "";
+        let quotesData = "";
+
+        const getNewQuotes = () => {
+            let rnum = Math.floor(Math.random() * 20);
+            quotesData = realData[rnum];
+            quotes.innerText = `${quotesData.text}`;
+            quotesData == null
+                ? (author.innerText = "unKnown")
+                : (author.innerText = `${quotesData.author}`);
+        };
+
+        const getQuotes = async () => {
+            const api = "https://type.fit/api/quotes";
+            try {
+                let data = await fetch(api);
+                realData = await data.json();
+                getNewQuotes();
+            } catch (error) { }
+        };
+        newQ.addEventListener("click", getNewQuotes);
+        getQuotes();
+    </script>
+
+</body>
+</html>
